@@ -35,12 +35,9 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Dependencies -->
-        <selenium.version>4.48.0</selenium.version>
-
+        <selenium.version>4.49.0</selenium.version>
         <junit.version>5.14.4</junit.version>
-
         <cucumber.version>7.34.9</cucumber.version>
-
         <json.version>20260814</json.version>
         <extentreports.version>5.1.2</extentreports.version>
         <poi.version>5.5.1</poi.version>
