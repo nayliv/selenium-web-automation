@@ -18,7 +18,7 @@ import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 )
 @ConfigurationParameter(
         key = FILTER_TAGS_PROPERTY_NAME,
-        value = ""
+        value = "@cart"
 )
 @ConfigurationParameter(
         key = PLUGIN_PROPERTY_NAME,
