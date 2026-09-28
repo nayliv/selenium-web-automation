@@ -1,6 +1,7 @@
 package io.github.nayliv.hooks;
 
 import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.github.nayliv.config.ConfigManager;
@@ -25,20 +26,31 @@ public class Hooks {
                 .maximize();
     }
 
-    @After
-    public void tearDown(Scenario scenario) {
-        try {
-            byte[] screenshot = ((TakesScreenshot) DriverManager.getDriver())
-                    .getScreenshotAs(OutputType.BYTES);
-
-            scenario.attach(
-                    screenshot,
-                    "image/png",
-                    "Validation - " + scenario.getName()
-            );
-
-        } finally {
-            DriverManager.quitDriver();
+    @AfterStep
+    public void takeScreenshotOnFailure(Scenario scenario) {
+        if (!scenario.isFailed()) {
+            return;
         }
+
+        WebDriver driver = DriverManager.getDriver();
+
+        if (driver == null) {
+            return;
+        }
+
+        byte[] screenshot =
+                ((TakesScreenshot) driver)
+                        .getScreenshotAs(OutputType.BYTES);
+
+        scenario.attach(
+                screenshot,
+                "image/png",
+                "Failure - " + scenario.getName()
+        );
+    }
+
+    @After
+    public void tearDown() {
+        DriverManager.quitDriver();
     }
 }
